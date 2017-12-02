@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3.dtd">
+<mapper namespace="com.oracle.ebp.dao.OrderMapper">
+<resultMap type="com.oracle.ebp.domain.NewOrder" id="ClassResultMap">
+         <id property="oid" column="oid"/>
+        <result property="commitTime" column="commitTime"/>
+        <result property="amount" column="amount"/>
+         <association property="user" javaType="com.oracle.ebp.domain.User">
+             <id property="uid" column="uid"/>
+             <result property="username" column="username"/>
+             <result property="password" column="password"/>
+             <result property="name" column="name"/>
+             <result property="gender" column="gender"/>
+             <result property="age" column="age"/>
+             <result property="idCard" column="idCard"/>
+             <result property="address" column="address"/>
+             <result property="regTime" column="regTime"/>
+             <result property="telno" column="telno"/>
+             <result property="status" column="status"/>
+         </association>
+         <association property="orderlist" javaType="com.oracle.ebp.domain.NewOrderList">
+         <id property="lid" column="lid"/>
+         <result property="tId" column="tId"/>
+         <result property="descs" column="descs"/>
+         <result property="price" column="price"/>
+         <result property="quantity" column="quantity"/>
+         <result property="amount" column="amount"/>
+         <result property="oid" column="oid"/>
+         </association>
+     </resultMap>
+     
+     <resultMap type="NewOrder" id="order_map">
+		<result property="orderlist.descs" column="descs"/>
+		<result property="orderlist.amount" column="amount"/>
+		<result property="orderlist.price" column="price"/>
+		<result property="user.username" column="username"/>
+		<result property="user.name" column="name"/>
+		<result property="user.idCard" column="idCard"/>
+	</resultMap>
+
+<select id="listOrder" parameterType="User" resultType="NewOrder">
+	select* from orders,user where orders.uid=user.uid and user.uid=#{uid}
+</select>
+<delete id="deleteOrderlist" parameterType="int">
+	delete from orderlist where oid=#{oid}
+</delete>
+<delete id="deleteOrder" parameterType="int">
+	delete from orders where oid=#{oid}
+</delete>
+<select id="orderDtails" resultType="order" resultMap="ClassResultMap">
+		select* from orders,orderlist,user where orders.oid=orderlist.oid
+		 and orders.uid=user.uid and orderlist.oid=#{0} and orders.uid=#{1}
+</select>
+
+<select id="retrieveallorder" resultMap="ClassResultMap">
+    SELECT * FROM orders o,USER u,orderlist l
+		WHERE o.uid=u.uid AND l.oid=o.oid
+</select>
+
+<select id="selectOrderByinput" resultMap="ClassResultMap">
+    SELECT * FROM orders o,USER u,orderlist l 
+		WHERE o.uid=u.uid AND l.oid=o.oid   
+		<if test="#{0} !=null and #{0} !='' or #{0}!=0">
+		     and o.oid=#{0}
+		</if>
+		<if test="#{1} !=null and #{1} !=''">
+			and (u.name like concat('%',#{1},'%') or u.username like concat('%',#{1},'%')) 
+		</if>
+		<if test="#{2} !=null and #{2} !=''">
+			and u.idCard like concat('%',#{2},'%') 
+		</if>
+</select>
+
+<select id="queryOrdersByDatePage" resultMap="ClassResultMap">
+		SELECT * FROM orders o,USER u,orderlist l
+		WHERE o.uid=u.uid AND l.oid=o.oid 
+		<if test="#{0} !=null and #{0} !='' and (#{1}==null or #{1}=='')">
+			and o.commitTime &gt; #{0}
+		</if>
+		<if test="(#{0} ==null or #{0} =='') and #{1}!=null and #{1}!=''">
+			and o.commitTime &lt; #{1}
+		</if>
+		<if test="#{0} !=null and #{0} !='' and #{1}!=null and #{1}!=''">
+			and o.commitTime between #{0} and #{1}
+		</if>
+		
+		</select>
+		
+		<select id="getCount" resultType="int" parameterType="int">
+	select count(*) from orders where uid=#{uid}
+</select>
+<select id="getOrder" resultType="NewOrder"  resultMap="ClassResultMap">
+	select* from orders,orderlist,user where orders.oid=orderlist.oid
+		 and orders.uid=user.uid and orders.uid=#{uid} limit #{start},#{length} 
+</select>
+</mapper>

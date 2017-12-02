@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3.dtd">
+    
+<mapper namespace="com.oracle.ebp.dao.TicketDetailMapper">
+
+	<select id="retrieveByTid" parameterType="int" resultType="TicketDetail">
+		
+		select * from ticketdetail where tid = #{tid}
+		
+	</select>
+	
+	<insert id="addDetail" parameterType="ticketdetail" >
+		
+		insert into ticketdetail (tId , descs , images , sequence)
+		values ( #{tId}, #{descs}, #{images}, #{sequence})
+
+	</insert>
+	
+	
+	
+	
+	<select id="update" parameterType="ticketdetail" >
+		
+		update ticketdetail set tId = #{tId}
+		<if test="descs!=''">
+			, descs = #{descs} 
+		</if>
+		<if test="images!=''">
+			, images = #{images} 
+		</if>
+		<if test="sequence!=''">
+			, sequence = #{sequence} 
+		</if>
+
+		where tId = #{tId}
+
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="DeleteDetail" parameterType="int">
+		
+		delete from ticketdetail where tId = #{tId}
+
+	</select>
+	<select id="updatetId" parameterType="int">
+		
+		update ticketdetail set tId = tId-1 where tId > #{tId}
+
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="retrieveAll"  resultType="TicketDetail">
+		
+		select * from ticketdetail 
+		<if test="ticketdetail.tId!= 0">
+			where tId = #{ticketdetail.tId}
+		</if>
+		limit #{start},#{length}
+
+	</select>
+	<select id="getcount"  parameterType="ticketdetail" resultType="int">
+		select count(*) from ticketdetail
+		<if test="tId!= 0 ">
+			where tId = #{tId}
+		</if>
+	</select>
+	 
+</mapper>
+	

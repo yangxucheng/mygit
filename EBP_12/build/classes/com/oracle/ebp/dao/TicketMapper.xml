@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3.dtd">
+    
+<mapper namespace="com.oracle.ebp.dao.TicketMapper">
+	
+	<select id="retrieveAll" resultType="Ticket">
+		
+		select * from ticket
+
+	</select>
+	
+	<select id="retrieveById" parameterType="int" resultType="Ticket">
+		
+		select * from ticket where tid = #{tid}
+		
+	</select>
+	<select id="retrieveByDescs" parameterType="String" resultType="Ticket">
+		
+		select * from ticket where descs = #{descs}
+		
+	</select>
+	
+	<select id="getallcount"  resultType="int">
+		
+		select count(*) from ticket 
+		
+	</select>
+	
+	<select id="getcount" parameterType="TicketNum" resultType="int">
+		
+		select count(*) from ticket a , ticketdetailnum b , ticketdetail c where 1
+		<if test="tid!=0">
+			and a.tid like concat('%',#{tid},'%')
+		</if>
+		<if test="startTime!=null">
+			and a.startTime >  #{startTime}
+		</if>
+		<if test="endTime!=null">
+			and a.startTime &lt; #{endTime}
+		</if>
+		<if test="descs!=''">
+			and a.descs like concat('%',#{descs},'%')
+		</if>
+			and a.tid = b.ticketid and a.tid = c.tId
+		
+		
+		
+	</select>
+	<select id="retrieveLike"  resultType="DetailShow">
+		
+		select * from ticket a , ticketdetailnum b , ticketdetail c where 1
+		
+		<if test="ticketnum.descs!=''">
+			and a.descs like concat('%',#{ticketnum.descs},'%')
+		</if>
+		
+		<if test="ticketnum.tid!=0">
+			and a.tid like concat('%',#{ticketnum.tid},'%')
+		</if>
+		
+		<if test="ticketnum.startTime!=null">
+			and a.startTime > #{ticketnum.startTime}
+		</if>
+		<if test="ticketnum.endTime!=null">
+			and a.startTime &lt; #{ticketnum.endTime}
+		</if>
+		
+		and a.tid = b.ticketid and a.tid = c.tId limit #{start},#{length}
+		
+	</select>
+	
+	
+	
+	
+	
+	<select id="UpdateStatusZero" parameterType="int" >
+		
+		update ticket set status = 1 where tid  = #{tid}
+		
+		
+	</select>
+	<select id="UpdateStatusOne" parameterType="int" >
+		
+		update ticket set status = 0 where tid  = #{tid}
+		
+		
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="delete" parameterType="int">
+		
+		delete from ticket where tid = #{tid}
+
+	</select>
+	<select id="updatetid" parameterType="int">
+		
+		update ticket set tid = tid-1 where tid > #{tid}
+
+	</select>
+	
+	
+	
+	
+	 <select id="update" parameterType="ticket">
+		 
+		update ticket set status = #{status}
+		<if test="descs!=''">
+			, descs = #{descs} 
+		</if>
+		<if test="amount!=0">
+			, amount = #{amount} 
+		</if>
+		<if test="balance!=0">
+			, balance = #{balance} 
+		</if>
+		
+		<if test="price!=0">
+			, price = #{price}
+		</if>
+		
+		where tid = #{tid}
+	</select>
+	 
+	 
+	<insert id="insert" parameterType="ticket">
+		insert into ticket (tid,descs, startTime, amount,balance,price,status)
+		values (#{tid},#{descs}, #{startTime}, #{amount}, #{balance}, #{price}, #{status})
+	</insert>
+
+	
+</mapper>

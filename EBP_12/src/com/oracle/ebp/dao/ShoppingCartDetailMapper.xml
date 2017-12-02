@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3.dtd">
+<mapper namespace="com.oracle.ebp.dao.ShoppingCartDetailMapper">
+
+    <select id="insertByshoppingcartdetail" parameterType="ShoppingCartDetail" >
+    insert into shoppingcartdetail(scid,tId,quantity) values(#{scid},#{tId},#{quantity})
+    </select>
+   <select id="deleteByTid" parameterType="int" >
+    delete from ShoppingCartdetail where tId=#{tid} 
+    </select>
+    <select id="retrieveAll" resultType="shoppingCartDetail">
+    select *from ShoppingCartdetail;
+    </select>
+    <select id="getShoppingDetailAndTicket" resultType="ShoppingCartDetailTicket" >
+    select * from shoppingcart,user,shoppingcartdetail,ticket where shoppingcartdetail.tId=ticket.tid 
+    and user.uid=shoppingcart.userId and shoppingcart.scid=shoppingcartdetail.scid
+    and user.uid=#{uid}
+    </select>
+    
+    <select id="getUserbalance" parameterType="int" resultType="double" >
+    select balance from user where uid=#{uid}
+    </select>
+    
+    <select id="setNewBalance" parameterType="User" >
+    update user set balance=${balance} where uid=${uid}
+    </select>
+    
+    <select id="get_userByUid" parameterType="int" resultType="User">
+    select *from user where uid=#{uid}
+    </select>
+    
+	<insert id="insert_order" parameterType="Order" >
+	 
+     <selectKey keyProperty="oid" order="AFTER" resultType="int">
+     select LAST_INSERT_ID() As id
+     </selectKey>
+     insert into orders(commitTime,amount,uid) values(#{commitTime},#{amount},#{uid})
+    </insert>
+    
+    
+    <select id="setNewticketNumbers" parameterType="Ticket" >
+    update ticket set balance=${balance} where tid=${tid}
+    </select>
+    
+    
+    <select id="insert_orderlist" parameterType="OrderList" >
+     insert into orderlist(descs,price,quantity,amount,oid,tid) values(#{descs},#{price},#{quantity},#{amount},#{oid},#{tid})
+    </select>
+    
+	 <select id="retrieveorderByUid" resultType="Order" parameterType="int">
+    select *from orders where uid=#{uid}
+    </select>
+    
+    <select id="retrieveorderlistByOid" resultType="OrderList">
+    select *from orderlist where oid=#{oid}
+    </select>
+    
+     <select id="get_Maxoid"  resultType="int">
+    select max(oid) from orders 
+    </select>
+    
+    
+     <select id="get_ticketBalance" parameterType="int" resultType="int">
+     select balance from ticket where tid=#{tid}
+    </select>
+    
+    <select id="selectAllTicket" resultType="Ticket">
+		select * from ticket
+	</select>
+	
+
+	<select id="selectShoppingCartbyTid"   resultType="ShoppingCartDetail">
+		select * from shoppingcartdetail where tId=#{1} and scid=#{0}
+	</select>
+	
+	<select id="updateshoppingTicketnumber"  parameterType="ShoppingCartDetail">
+		update shoppingcartdetail set quantity=${quantity} where tId=${tId}
+	</select>
+
+
+</mapper>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<style>
+    *{margin:0;padding: 0;list-style: none;text-decoration: none;}
+    #nav{width: 500px;height: 40px;background: #ccc;margin: 0 auto;}
+    ul{background: #aaa}
+    ul li{float:left; height: 40px; line-height: 40px; padding: 0 20px; position: relative;}
+    ul li:hover{background: #cea;}
+    ul li ul li{float: none;}
+    ul li ul{position: absolute;top:40px;left: 0; display: none;}
+    ul li ul li:hover{background: red;}
+    ul li ul li ul{left:72px; top:0px;padding: 0 0px;width: 85px}
+
+    
+</style>
+</head>
+<body>
+    <div id="nav">
+    <ul>
+        <li><a href="">首页</a></li>
+        <li class="navmenu"><a href="">汽车</a>
+          <ul>
+               <li><a href="#">奥迪</a> 
+               <ul>
+               <li>奥迪1</li>
+               <li>奥迪2</li>
+               <li>奥迪3</li>
+               </ul>
+               
+               </li>
+               
+               <li><a href="#">道奇</a> </li>
+         </ul>
+        </li>
+        <li class="navmenu"><a href="">手机</a>
+          <ul>
+              <li><a href="#">小米</a>
+             <ul>
+             	<li><a href="#"><p>小米2</p></a></li>
+             	<li><a href="#"><p>虾米4</p></a></li>
+             </ul>
+             <>
+              <li><a href="#">华为</a> 
+              <ul>
+              <li>华为1</li>
+              <li>华为2</li>
+              <li>护卫3</li>
+              </ul>
+              
+              </li>
+            
+         </ul>
+        </li>
+        <li><a href="">联系我们</a><>
+   </ul>
+</div>	
+<script src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript">
+$(function(){ $("li").has("ul").mouseover(function(){ 
+	$(this).children("ul").show(); 
+$(this).css("backgroundColor","#0066FF"); 
+}).mouseout(function () { $(this).children("ul").hide();
+$(this).css("backgroundColor","#eee"); 
+}) 
+}) 
+</script>
+</body>
+</html>

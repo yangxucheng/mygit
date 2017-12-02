@@ -1,0 +1,224 @@
+@CHARSET "UTF-8";
+.main {
+    width: 1000px;
+    margin: 15px auto 0;
+    *zoom: 1;
+}
+.main a{
+	text-decoration:none
+}
+.breadcrumb{
+	border: 1px solid #efefef;
+    height: 38px;
+    overflow: hidden;
+    background: url(//dui.damai.cn/damai_v2/passport/images/breadbg.png) repeat-x;
+    padding: 0 15px;
+    line-height: 38px;
+    color: #999;
+    margin-bottom: 15px;
+}
+.right-main{
+	width: 790px;
+	float: right;
+	
+}
+.tab-mydamai{
+	margin-top: 23px;
+}
+.tab-mydamai .title{
+		height: 29px;
+}
+.title li{
+	float: left;
+	padding: 5px;
+	list-style: none;
+}
+
+.tab-mydamai .title li a {
+    display: block;
+    line-height: 29px;
+    text-align: center;
+    color: #333;
+    font-size: 15px;
+    padding: 0 2px;
+    padding:4px 10px 4px 10px;
+    background-color: #FEFEFE;
+    text-decoration: none;
+    border-top: 1px solid #EFEFEF;
+	border-left: 1px solid #EFEFEF;
+	border-bottom: 1px solid #EFEFEF;
+	border-right: 1px solid #EFEFEF;
+	border-radius: 10px;
+}
+.tab-mydamai .title li a:hover{
+	padding: 5px 8px 3px 12px;
+	background-color: #EFEFEF;
+	 border-top: 1px solid #EFEFEF;
+	border-left: 1px solid #EFEFEF;
+	border-bottom: 1px solid #EFEFEF;
+	border-right: 1px solid #EFEFEF;
+	border-radius: 10px;
+}
+.tab-mydamai a {
+    color: #2f97b4;
+}
+.tab-mydamai .title li.right {
+    float: right;
+    color: #333;
+    font-size: 15px;
+    font-family: "Microsoft YaHei";
+    width: 180px;
+    text-align: right;
+    line-height: 20px;
+}
+.tab-mydamai .title li {
+    float: left;
+    width: 104px;
+    height: 29px;
+    overflow: hidden;
+    margin-left: 5px;
+    display: inline;
+}
+.right span{
+	font-size: 30px;
+	color:#f81c5a;
+	font-weight: bold; 
+}
+.per-edit-list .per-edit-msg {
+    background: #fffdee;
+    border: 1px solid #edd28b;
+    padding: 10px 20px;
+    color: #999;
+    margin-bottom: 15px;
+}
+.per-edit-list dt span.c4 {
+    padding-right: 5px;
+}
+.c4, a.c4 {
+    color: #e51a45;
+}
+.per-edit-list {
+    color: #666;
+}
+.per-edit-list dd .input-text-2 {
+    width: 120px;
+}
+.per-edit-list dd .input-text, .per-edit-list dd .input-text-1, .per-edit-list dd .input-text-2 {
+    width: 200px;
+    height: 14px;
+    padding: 3px;
+    line-height: 14px;
+    border: 1px solid #efefef;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgb(239, 239, 239);
+    border-top: 1px solid #d5d5d5;
+}
+body, button, input, select, textarea {
+    font: 12px/1.5 "Microsoft YaHei";
+        line-height: 1.5;
+}
+input, textarea, select {
+    *font-size: 100%;
+}
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+.per-edit-list button {
+    border: 0;
+    margin: 0 0 0 75px;
+}
+.btn05 {
+    background-position: -243px -93px;
+    width: 94px;
+    height: 32px;
+}
+.btn01, .btn02, .btn03, .btn04, .btn05, .btn06, .btn07, .btn08, .btn09, .btn10, .btn11, .cancel-btn {
+    background: url(//dui.damai.cn/damai_v2/passport/images/b.png) no-repeat;
+        background-position-x: 0%;
+        background-position-y: 0%;
+    width: 73px;
+    height: 25px;
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+}
+body, button, input, select, textarea {
+    font: 12px/1.5 "Microsoft YaHei";
+}
+.sidenav{
+    width: 200px;
+    float: left;
+
+}
+
+#mydamai {
+    border: 1px solid #efefef;
+    margin-bottom: 15px;
+}
+#mydamai h3 {
+    background: url(//dui.damai.cn/damai_v2/passport/images/side-h2.png) no-repeat;
+    width: 192px;
+    height: 33px;
+    position: relative;
+    left: -3px;
+    padding-left: 11px;
+    line-height: 30px;
+    font-family: "Microsoft YaHei";
+    font-size: 14px;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom:-14px;
+    margin-top: 0px;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: 400;
+}
+
+#mydamai h3 a {
+    color: #fff;
+}
+#mydamai dt {
+    background: url(//dui.damai.cn/damai_v2/passport/images/side-h3.png) repeat-x;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    font-family: "Microsoft YaHei";
+    color: #333;
+    font-weight: 700;
+}
+#mydamai dt:hover{
+	 background:#efefef;
+    border-top: 1px solid #efefef;
+    border-bottom: 1px solid #efefef;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    font-family: "Microsoft YaHei";
+    color: #333;
+    font-weight: 700;
+}
+#mydamai dd a {
+    background: url(//dui.damai.cn/damai_v2/passport/images/i.png) no-repeat scroll 15px 13px;
+    *background-position: 33px 12px;
+    _background-position: 33px 13px;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 33px;
+    display: block;
+}
+#mydamai dd a:hover{
+	background: url(//dui.damai.cn/damai_v2/passport/images/i.png) no-repeat scroll 150px 13px;
+    *background-position: 33px 12px;
+    _background-position: 33px 13px;
+    height: 32px;
+    line-height: 32px;
+    padding-left: 33px;
+    display: block;
+}
+

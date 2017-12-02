@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3.dtd">
+
+<mapper namespace="com.oracle.ebp.dao.AdminMapper">
+	
+	 <select id="retrieve" parameterType="string" resultType="admin">
+		select * from adminUser where username= #{username}
+	</select>
+	
+		<select id="getAdminByuserName" parameterType="String"
+		resultType="admin">
+		select * from adminUser where username=#{username}
+	</select>
+
+	<!-- 以下是用户管理部分 -->
+	<select id="getAllUsers" resultType="user">
+    	select uid, username, name, gender, age, idCard, address, telno, regTime, balance, status 
+    	from user
+    </select>
+    
+    <select id="getUsersByTime" resultType="user">
+    	select uid, username, name, gender, age, idCard, address, telno, regTime, balance, status 
+    	from user
+    	<where>
+    		<if test="#{0} != null">
+    			regTime &gt;= #{0}
+    		</if>
+    		<if test="#{1} != null"> 
+	            <if test="#{0} != null"> 
+	                AND 
+	            </if> 
+                regTime &lt;= #{1}
+            </if> 
+    	</where>
+    </select>
+    
+    <select id="getUsersByNameIdcardTelno" resultType="user">
+    		select uid, username, name, gender, age, idCard, address, telno, regTime, balance, status 
+    	from user
+    	<where>
+    		<if test="#{0} != null and #{0} != ''">
+    			(username like concat('%',#{0},'%') or name like concat('%',#{0},'%'))
+    		</if>
+    		<if test="#{1} != null and #{1} != ''">
+    			<if test="#{0} != null and #{0} != ''">
+    			AND
+    			</if>
+    			idCard like concat('%',#{1},'%')
+    		</if>
+    		<if test="#{2} != null and #{2} != ''">
+    			<if test="(#{0} != null and #{0} != '') or (#{1} != null and #{1} != '')">
+    			AND
+    			</if>
+    			telno like concat('%',#{2},'%')
+    		</if>
+    		
+    	</where>
+    </select>
+    <update id="stopUser" parameterType="java.lang.Integer">
+    	update user set status = 0 where uid = #{uid}
+    </update>
+    
+    <update id="startUser" parameterType="java.lang.Integer">
+    	update user set status = 1 where uid = #{uid}
+    </update>
+
+	
+</mapper>
